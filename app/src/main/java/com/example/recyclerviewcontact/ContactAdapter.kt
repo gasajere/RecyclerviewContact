@@ -9,7 +9,7 @@ import com.example.recyclerviewcontact.databinding.ItemContactBinding
 class ContactAdapter(private val contacts:List<ContactItem>,
                      private val listener:OnItemClickListener) :RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
-    inner class ContactViewHolder(private val binding:ItemContactBinding,):RecyclerView.ViewHolder(binding.root),
+    inner class ContactViewHolder(private val binding:ItemContactBinding):RecyclerView.ViewHolder(binding.root),
         View.OnClickListener{
         fun bind(currentContact:ContactItem) {
 
@@ -25,11 +25,12 @@ class ContactAdapter(private val contacts:List<ContactItem>,
         override fun onClick(v: View?) {
             val position=adapterPosition
             val item=
-            listener.onContactClick(position,)
+                listener.onContactClick(position)
         }
 
-        }  interface OnItemClickListener{
-        fun onContactClick (position: Int,item: ContactItem)
+    }  interface OnItemClickListener{
+
+        fun onContactClick (position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {

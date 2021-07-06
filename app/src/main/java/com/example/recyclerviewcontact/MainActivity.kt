@@ -8,7 +8,9 @@ import com.example.recyclerviewcontact.databinding.ActivityContact2Binding
 import com.example.recyclerviewcontact.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(),ContactAdapter.OnItemClickListener {
+
     private lateinit var binding: ActivityMainBinding
+    private lateinit var item: ContactItem
     private lateinit var myContactAdapter: ContactAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,12 +30,17 @@ class MainActivity : AppCompatActivity(),ContactAdapter.OnItemClickListener {
     }
 
     override fun onContactClick( position: Int) {
-        val item:ContactItem
 
         val intent=Intent(this, Contact::class.java)
-        val putExtra = intent.putExtra("FirstName", item.tv1)
+         intent.putExtra("tvTitle", item.tv1)
+         intent.putExtra("tv2ndtitle", item.tv2)
+        intent.putExtra("Ivone", item.imageResource.toString())
+        startActivity(intent)
+
         //Toast.makeText(this, "contact $position clicked", Toast.LENGTH_SHORT).show()
     }
+
+
 
 
     private fun makeList(size:Int):List<ContactItem>{
@@ -48,19 +55,19 @@ class MainActivity : AppCompatActivity(),ContactAdapter.OnItemClickListener {
                 else -> R.drawable.ic_verified
             }
             val contacts:List<ContactItem> = listOf(
-        ContactItem(drawable, "Terence", "Sajere"),
+                ContactItem(drawable, "Terence", "Sajere"),
                 ContactItem(R.drawable.ic_stranger, "Jadon", "Sancho"),
                 ContactItem(R.drawable.ic_hey, "Raheem", "Sterling"),
                 ContactItem(R.drawable.ic_verified, "Moses", "Igbedion"),
                 ContactItem(drawable, "Maro","Idiowa"),
-            ContactItem(R.drawable.ic_verified,"Sasuke","Uchiha"),
-            ContactItem(R.drawable.ic_stranger,"Kakashi","Hatake"),
-            ContactItem(R.drawable.ic_hey,"Leon","Bailey"),
-            ContactItem(R.drawable.ic_verified,"Jason","Vorhees"),
-            ContactItem(R.drawable.ic_face,"Natsu","Dragneel"))
+                ContactItem(R.drawable.ic_verified,"Sasuke","Uchiha"),
+                ContactItem(R.drawable.ic_stranger,"Kakashi","Hatake"),
+                ContactItem(R.drawable.ic_hey,"Leon","Bailey"),
+                ContactItem(R.drawable.ic_verified,"Jason","Vorhees"),
+                ContactItem(R.drawable.ic_face,"Natsu","Dragneel"))
 
 
-                lists += contacts
+            lists += contacts
 
 
         }
@@ -68,3 +75,6 @@ class MainActivity : AppCompatActivity(),ContactAdapter.OnItemClickListener {
     }
 
 }
+
+
+

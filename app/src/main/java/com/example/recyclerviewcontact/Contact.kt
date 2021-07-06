@@ -11,5 +11,9 @@ class Contact : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding= ActivityContact2Binding.inflate(layoutInflater)
         setContentView(binding.root)
+        binding.Firstname.text= getIntent().getStringExtra("tvTitle")
+        binding.Surname.text= getIntent().getStringExtra("tv2ndtitle")
+        binding.contactimage.setImageResource(getIntent().getStringExtra("Ivone")!!.toInt())
+
     }
 }
