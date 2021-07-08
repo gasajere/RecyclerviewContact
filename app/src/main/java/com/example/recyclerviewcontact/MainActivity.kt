@@ -6,11 +6,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.recyclerviewcontact.databinding.ActivityContact2Binding
 import com.example.recyclerviewcontact.databinding.ActivityMainBinding
+import com.example.recyclerviewcontact.databinding.ItemContactBinding
 
-class MainActivity : AppCompatActivity(),ContactAdapter.OnItemClickListener {
+class MainActivity : AppCompatActivity(){
 
     private lateinit var binding: ActivityMainBinding
-    private lateinit var item: ContactItem
     private lateinit var myContactAdapter: ContactAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,30 +18,18 @@ class MainActivity : AppCompatActivity(),ContactAdapter.OnItemClickListener {
         setContentView(binding.root)
 
         val exampleList=makeList(2)
-        myContactAdapter= ContactAdapter(exampleList, this)
-        binding.recyclerView.adapter=myContactAdapter
+        myContactAdapter= ContactAdapter(
+            exampleList,
+        ) {
+            val intent = Intent(this, Contact::class.java)
+            intent.putExtra("tvTitle", it.tv1)
+            intent.putExtra("tv2ndtitle", it.tv2)
+            intent.putExtra("Ivone", it.imageResource)
+            startActivity(intent)
+        }
 
-
-
-
-
-
-
+        binding.recyclerView.adapter = myContactAdapter
     }
-
-    override fun onContactClick( position: Int) {
-
-        val intent=Intent(this, Contact::class.java)
-         intent.putExtra("tvTitle", item.tv1)
-         intent.putExtra("tv2ndtitle", item.tv2)
-        intent.putExtra("Ivone", item.imageResource.toString())
-        startActivity(intent)
-
-        //Toast.makeText(this, "contact $position clicked", Toast.LENGTH_SHORT).show()
-    }
-
-
-
 
     private fun makeList(size:Int):List<ContactItem>{
         val lists= ArrayList<ContactItem>()

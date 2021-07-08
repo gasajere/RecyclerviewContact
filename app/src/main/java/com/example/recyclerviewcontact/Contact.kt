@@ -13,7 +13,7 @@ class Contact : AppCompatActivity() {
         setContentView(binding.root)
         binding.Firstname.text= getIntent().getStringExtra("tvTitle")
         binding.Surname.text= getIntent().getStringExtra("tv2ndtitle")
-        binding.contactimage.setImageResource(getIntent().getStringExtra("Ivone")!!.toInt())
+        binding.contactimage.setImageResource(getIntent().getIntExtra("Ivone", 7))
 
     }
 }

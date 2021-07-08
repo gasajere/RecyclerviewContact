@@ -6,31 +6,21 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recyclerviewcontact.databinding.ItemContactBinding
 
-class ContactAdapter(private val contacts:List<ContactItem>,
-                     private val listener:OnItemClickListener) :RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
+class ContactAdapter(
+    private val contacts:List<ContactItem>,
+    val clickfx:(ContactItem) -> Unit,
+    ) :RecyclerView.Adapter<ContactAdapter.ContactViewHolder>() {
 
-    inner class ContactViewHolder(private val binding:ItemContactBinding):RecyclerView.ViewHolder(binding.root),
-        View.OnClickListener{
+    inner class ContactViewHolder(private val binding:ItemContactBinding):RecyclerView.ViewHolder(binding.root){
         fun bind(currentContact:ContactItem) {
 
             binding.tvTitle.text=currentContact.tv1
             binding.tv2ndtitle.text=currentContact.tv2
             binding.ivone.setImageResource(currentContact.imageResource)
-
-            itemView.setOnClickListener(this)
-
-
+            binding.root.setOnClickListener{4
+                clickfx(currentContact)
+            }
         }
-
-        override fun onClick(v: View?) {
-            val position=adapterPosition
-            val item=
-                listener.onContactClick(position)
-        }
-
-    }  interface OnItemClickListener{
-
-        fun onContactClick (position: Int)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactViewHolder {
